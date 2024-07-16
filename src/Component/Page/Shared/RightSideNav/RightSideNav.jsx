@@ -45,6 +45,13 @@ const RightSideNav = () => {
         <img src={Qzone2} alt="" />
         <img src={Qzone3} alt="" />
       </div>
+      <div className="p-4 space-y-3 bg-black text-center">
+       <h2 className="text-2xl text-white font-bold">
+       Create an Amazing Newspaper
+       </h2>
+       <p className="text-white">Discover thousands of options, easy to customize layouts, one-click to import demo and much more.</p>
+      <button className="btn btn-secondary ">Learn More</button>
+      </div>
     </div>
   );
 };

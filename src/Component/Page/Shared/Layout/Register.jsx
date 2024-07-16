@@ -1,7 +1,27 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../Route/AuthProvider";
 
 const Register = () => {
+  const {CreateUser}=useContext(AuthContext);
+  const handleRegister= e =>{
+    e.preventDefault();
+    const form =new FormData(e.currentTarget);
+    const email=form.get('email')
+    const password=form.get('password')
+    const name=form.get('name')
+    const photo=form.get('photo')
+    console.log(email,password,name,photo);
+    // register user in firebase 
+    CreateUser(email,password)
+    .then(result =>{
+      console.log(result.user );
+    })
+    .catch(error =>{
+      console.error(error)
+    })
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -16,7 +36,7 @@ const Register = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>

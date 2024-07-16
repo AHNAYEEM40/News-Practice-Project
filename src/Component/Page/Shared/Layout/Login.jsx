@@ -1,8 +1,26 @@
-import React from "react";
+import { useContext } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Route/AuthProvider";
 
 const Login = () => {
+  const {Login} =useContext(AuthContext)
+  const handleLogin = e =>{
+     e.preventDefault();
+     const form =new FormData(e.currenttarget);
+     const email =form.get('email');
+     const password=form.get('password');
+     console.log(email,password);
+    //  log in user in firebase
+    Login(email,password)
+    .then(result =>{
+      console.log(result.user);
+    }) 
+    .catch(error =>{
+      console.error(error)
+    })
+
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -17,7 +35,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
